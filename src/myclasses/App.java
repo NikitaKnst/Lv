@@ -100,7 +100,15 @@ public class App {
         
                     );
             }
+            case 7:
+                System.out.println("Vernut knigi");
+                printGivenBooks();
+                System.out.println("");
             }
+            System.out.println("Выберите возвращаемые книги");
+            int historyNumber=scanner.nextInt();scanner.nextLine();
+            Calendar c=new GregorianCalendar();
+            histories[historyNumber-1].setReturnDate(c.getTime());
            break;
         }
         while("y".equals(repeat));
