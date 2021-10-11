@@ -23,7 +23,7 @@ public class App {
     Book[] books = new Book[10];
     Reader[] readers=new Reader[10];
     History[] history=new History[10];
-
+    History[] histories=new History[10];
     public App() {
     }
     
@@ -35,7 +35,9 @@ public class App {
             System.out.println("1: Добавить книгу");
             System.out.println("2: Список книг");
             System.out.println("3: Добавить читателя");
-             System.out.println("4: Список читателей");
+            System.out.println("4: Список читателей");
+            System.out.println("5: Выдача книг");
+            System.out.println("6: Список читателей с книгами");
             int task = scanner.nextInt();
             scanner.nextLine();
             switch (task) {
@@ -77,8 +79,31 @@ public class App {
                         }
                     }
                     break;
+              case 5:
+                System.out.println("Выдача книги: ");
+                for (int i=0; i < histories.length; i++){
+                     if(histories[i] != null){
+                         histories[i]=addHistory();
+                        break;
+                    }
+                }
+            break;
+            case 6:
+            System.out.println("Список выданных книг");
+            for(int i=0; i<histories.length;i++){
+                if(histories[i] !=null)
+                    System.out.printf("%d. Книгу: %d читает %a %s%n",
+                            i+1,
+                histories[i].getBook().getCaption(),
+                histories[i].getReader().getFirstname(),
+                histories[i].getReader().getLastname()
+        
+                    );
             }
-        }while("y".equals(repeat));
+            }
+           break;
+        }
+        while("y".equals(repeat));
     }
     
     private Book addBook(){
@@ -122,6 +147,28 @@ public class App {
         reader.setPhone(scanner.nextLine());
         return reader;
     }
+  private History addHistory(){
+      History history1=new History();
+      System.out.println("Список читателей");
+         for (int i = 0; i < books.length; i++) {
+                        if(books[i] == null){
+                            System.out.printf("%d. %s%n",i+1,books[i].toString());
+                            
+                        }
+                    }
+         int bookNumber=scanner.nextInt();scanner.nextLine();
+         history1.setBook(books[bookNumber-1]);
+          for (int i = 0; i < readers.length; i++) {
+                        if(readers[i] == null){
+                            System.out.printf("%d. %s%n",i+1,readers[i].toString());
+                            
+                        }
+                    }
+         int readersNumber=scanner.nextInt();scanner.nextLine();
+         history1.setReader(readers[readersNumber-1]);
+      return history1;
+    
+}
 //        //System.out.println("Hello");
 //        Book book1 = new Book();
 //        book1.setCaption("Voina i Mir");
